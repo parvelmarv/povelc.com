@@ -8,3 +8,21 @@ export type User = {
   id: number;
   name: string;
 };
+
+export interface Project {
+  title: string;
+  description: string;
+  longDescription?: string;
+  image: string;
+  tags: string[];
+  link: string;
+  category: 'music' | 'games' | 'code';
+  isYoutube?: boolean;
+  youtubeId?: string;
+}
+
+export interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
