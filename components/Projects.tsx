@@ -1,33 +1,25 @@
 import React, { useState } from 'react';
 
-interface ProjectData {
+type ProjectType = {
+  id: number;
   title: string;
   description: string;
-  image: string;
+  imageUrl: string;
+  category: 'music' | 'games' | 'other';
   tags: string[];
-  link: string;
-  category: 'music' | 'games' | 'code';
-  isYoutube?: boolean;
-  youtubeId?: string;
-  longDescription?: string;
-  keyFeatures?: string[];
-  additionalScreenshots?: string[];
-  codeSnippets?: Array<{
-    title: string;
-    code: string;
-    language: string;
-  }>;
-}
+  videoUrl?: string;
+  codeSnippets?: string[];
+};
 
 const Projects: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'music' | 'games' | 'code'>('code');
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
+  const [activeTab, setActiveTab] = useState<'music' | 'games' | 'other'>('games');
+  const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
   const tabs = [
     { id: 'music' as const, label: 'Music' },
     { id: 'games' as const, label: 'Games' },
-    { id: 'code' as const, label: 'Code' }
+    { id: 'other' as const, label: 'Other' }
   ];
 
   const nextMedia = () => {
@@ -44,100 +36,161 @@ const Projects: React.FC = () => {
     }
   };
 
-  const projects: ProjectData[] = [
+  const projects: ProjectType[] = [
     {
+      id: 1,
       title: "Mushroom Environment",
       description: "Collab where I got to compose some music for an environment art",
-      image: "/projects/youtube.jpg",
+      imageUrl: "/projects/youtube.jpg",
+      category: "music",
       tags: ["Music Production", "Studio One", "Orchestral", "Composition"],
-      link: "https://youtu.be/dixpQ3kq6gI",
-      category: "music",
-      isYoutube: true,
-      youtubeId: "dixpQ3kq6gI",
-      longDescription: "A collaborative project where I composed the musical score for an environment art piece. The composition was created to enhance the mystical and atmospheric nature of the mushroom environment, blending orchestral elements with ambient sounds.",
-      keyFeatures: [
-        "Original composition for environment art",
-        "Atmospheric orchestration",
-        "Collaboration with visual artist",
-        "Created in Studio One"
-      ]
-    },
-    {
-      title: "Space Landing",
-      description: "Music composition for a sci-fi themed environment",
-      image: "/projects/youtube.jpg",
-      tags: ["Music Production", "Studio One", "Sci-Fi", "Ambient"],
-      link: "https://youtu.be/-V-H7jbXY3o",
-      category: "music",
-      isYoutube: true,
-      youtubeId: "-V-H7jbXY3o",
-      longDescription: "A musical piece composed for a sci-fi themed environment, capturing the atmosphere of a space landing sequence. The composition blends electronic and orchestral elements to create an immersive sci-fi atmosphere.",
-      keyFeatures: [
-        "Sci-fi atmospheric composition",
-        "Electronic and orchestral fusion",
-        "Environmental storytelling through sound",
-        "Created in Studio One"
-      ]
-    },
-    {
-      title: "Turrets & Tanks",
-      description: "2D tank battle game with physics-based combat",
-      image: "/projects/game1.jpg",
-      tags: ["Unreal Engine 5", "C++", "Blueprints", "Game Physics"],
-      link: "https://youtu.be/MIJztwSg2-s",
-      category: "games",
-      isYoutube: true,
-      youtubeId: "MIJztwSg2-s",
-      longDescription: "A physics-based tank battle game where players control turrets and tanks in intense combat scenarios. Features realistic projectile physics, dynamic damage systems, and interactive environments.",
-      keyFeatures: [
-        "Physics-based projectile system",
-        "Dynamic damage and destruction",
-        "AI-controlled enemy tanks",
-        "Multiple tank types with unique abilities"
-      ]
-    },
-    {
-      title: "Portfolio Website",
-      description: "Modern portfolio with Next.js and TypeScript",
-      image: "/projects/code1.jpg",
-      tags: ["Next.js", "TypeScript", "Tailwind"],
-      link: "#",
-      category: "code"
-    },
-    {
-      title: "API Service",
-      description: "RESTful API with Node.js and Express",
-      image: "/projects/code2.jpg",
-      tags: ["Node.js", "Express", "MongoDB"],
-      link: "#",
-      category: "code"
-    },
-    {
-      title: "Dungeon - Level Design",
-      description: "A showcase of dungeon level design and development",
-      image: "/projects/dungeon/0_dungeon.png",
-      tags: ["Level Design", "UE5", "Tags", "Blueprints"],
-      link: "https://youtu.be/knZdPb-aBOg",
-      category: "games",
-      isYoutube: true,
-      youtubeId: "knZdPb-aBOg",
-      longDescription: "An in-depth exploration of dungeon level design using Unreal Engine 5. This project demonstrates advanced level design techniques, gameplay mechanics, and environmental storytelling.",
-      keyFeatures: [
-        "Dynamic lighting system with volumetric fog",
-        "Interactive environment elements",
-        "Custom Blueprint-driven mechanics",
-        "Advanced material systems"
-      ],
-      additionalScreenshots: [
-        "/projects/dungeon/1_dungeon.png",
-        "/projects/dungeon/2_dungeon.png",
-        "/projects/dungeon/3_dungeon.png",
-        "/projects/dungeon/4_dungeon.png"
-      ],
+      videoUrl: "dixpQ3kq6gI",
       codeSnippets: [
         {
           title: "Grabber System",
-          language: "cpp",
+          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
+{
+    FVector Start = GetComponentLocation();
+    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
+
+    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
+    
+    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
+    bool HasHit;
+    
+    return HasHit = GetWorld()->SweepSingleByChannel(
+        OutHitResult,
+        Start, End, 
+        FQuat::Identity,
+        ECC_GameTraceChannel2,
+        Sphere
+    );
+}`
+        }
+      ]
+    },
+    {
+      id: 2,
+      title: "Space Landing",
+      description: "Music composition for a sci-fi themed environment",
+      imageUrl: "/projects/youtube.jpg",
+      category: "music",
+      tags: ["Music Production", "Studio One", "Sci-Fi", "Ambient"],
+      videoUrl: "-V-H7jbXY3o",
+      codeSnippets: [
+        {
+          title: "Grabber System",
+          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
+{
+    FVector Start = GetComponentLocation();
+    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
+
+    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
+    
+    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
+    bool HasHit;
+    
+    return HasHit = GetWorld()->SweepSingleByChannel(
+        OutHitResult,
+        Start, End, 
+        FQuat::Identity,
+        ECC_GameTraceChannel2,
+        Sphere
+    );
+}`
+        }
+      ]
+    },
+    {
+      id: 3,
+      title: "Turrets & Tanks",
+      description: "2D tank battle game with physics-based combat",
+      imageUrl: "/projects/game1.jpg",
+      category: "games",
+      tags: ["Unreal Engine 5", "C++", "Blueprints", "Game Physics"],
+      videoUrl: "MIJztwSg2-s",
+      codeSnippets: [
+        {
+          title: "Grabber System",
+          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
+{
+    FVector Start = GetComponentLocation();
+    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
+
+    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
+    
+    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
+    bool HasHit;
+    
+    return HasHit = GetWorld()->SweepSingleByChannel(
+        OutHitResult,
+        Start, End, 
+        FQuat::Identity,
+        ECC_GameTraceChannel2,
+        Sphere
+    );
+}`
+        }
+      ]
+    },
+    {
+      id: 4,
+      title: "UE - Gameplay Ability System (GAS)",
+      description: "Implementation of advanced gameplay mechanics using Unreal Engine's GAS framework",
+      imageUrl: "/projects/game1.jpg",
+      category: "games",
+      tags: ["Unreal Engine 5", "C++", "GAS", "Blueprints"],
+      codeSnippets: [
+        {
+          title: "Grabber System",
+          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
+{
+    FVector Start = GetComponentLocation();
+    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
+
+    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
+    
+    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
+    bool HasHit;
+    
+    return HasHit = GetWorld()->SweepSingleByChannel(
+        OutHitResult,
+        Start, End, 
+        FQuat::Identity,
+        ECC_GameTraceChannel2,
+        Sphere
+    );
+}`
+        }
+      ]
+    },
+    {
+      id: 5,
+      title: "This Website",
+      description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
+      imageUrl: "/images/portfolio.png",
+      category: "other",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    },
+    {
+      id: 6,
+      title: "Ascii-Art",
+      description: "Convert images to ASCII art using Python",
+      imageUrl: "/projects/code2.jpg",
+      category: "other",
+      tags: ["Python", "Image Processing", "ASCII"],
+    },
+    {
+      id: 7,
+      title: "Dungeon - Level Design",
+      description: "A showcase of dungeon level design and development",
+      imageUrl: "/projects/dungeon/0_dungeon.png",
+      category: "games",
+      tags: ["Level Design", "UE5", "Tags", "Blueprints"],
+      videoUrl: "knZdPb-aBOg",
+      codeSnippets: [
+        {
+          title: "Grabber System",
           code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
 {
     FVector Start = GetComponentLocation();
@@ -167,7 +220,7 @@ const Projects: React.FC = () => {
     document.body.style.overflow = 'auto';
   };
 
-  const openModal = (project: ProjectData) => {
+  const openModal = (project: ProjectType) => {
     setSelectedProject(project);
     document.body.style.overflow = 'hidden';
   };
@@ -176,27 +229,32 @@ const Projects: React.FC = () => {
     <>
       <section id="projects" className="py-20">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">My Projects</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            My Projects
+          </h2>
           
           {/* Tab Navigation */}
           <div className="relative mb-12">
-            <nav className="relative flex justify-center space-x-8 border-b border-gray-200">
+            <nav className="relative flex justify-center space-x-8">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`relative px-4 py-2 text-lg font-medium transition-colors duration-300
-                    ${activeTab === tab.id ? 'text-blue-600' : 'text-gray-600 hover:text-blue-500'}`}
+                  className={`nav-item relative px-4 py-2 ${
+                    activeTab === tab.id ? 'text-yellow-400' : 'text-gray-600 hover:text-yellow-400'
+                  }`}
                 >
                   {tab.label}
-                  {/* Individual bottom line for active tab */}
-                  {activeTab === tab.id && (
-                    <div 
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 transform translate-y-0.5"
-                    />
-                  )}
                 </button>
               ))}
+              {/* Sliding highlight */}
+              <div
+                className="absolute bottom-0 h-1 bg-yellow-400 transition-all duration-300 ease-in-out"
+                style={{
+                  left: `${tabs.findIndex(tab => tab.id === activeTab) * (100 / tabs.length)}%`,
+                  width: `${100 / tabs.length}%`,
+                }}
+              />
             </nav>
           </div>
 
@@ -211,16 +269,16 @@ const Projects: React.FC = () => {
                   className="text-left w-full bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
                 >
                   <div className="h-48 bg-gray-200 relative overflow-hidden">
-                    {project.isYoutube && project.youtubeId ? (
+                    {project.videoUrl ? (
                       <div className="relative w-full h-full group">
                         <img
-                          src={`https://img.youtube.com/vi/${project.youtubeId}/maxresdefault.jpg`}
+                          src={`https://img.youtube.com/vi/${project.videoUrl}/maxresdefault.jpg`}
                           alt={project.title}
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             // Fallback to medium quality if maxres is not available
                             (e.target as HTMLImageElement).src = 
-                              `https://img.youtube.com/vi/${project.youtubeId}/mqdefault.jpg`;
+                              `https://img.youtube.com/vi/${project.videoUrl}/mqdefault.jpg`;
                           }}
                         />
                         <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300">
@@ -237,7 +295,7 @@ const Projects: React.FC = () => {
                       </div>
                     ) : (
                       <img
-                        src={project.image}
+                        src={project.imageUrl}
                         alt={project.title}
                         className="w-full h-full object-cover"
                       />
@@ -290,7 +348,7 @@ const Projects: React.FC = () => {
                 {currentMediaIndex === 0 ? (
                   <iframe
                     className="absolute top-0 left-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${selectedProject.youtubeId}?autoplay=1`}
+                    src={`https://www.youtube.com/embed/${selectedProject.videoUrl}?autoplay=1`}
                     title={selectedProject.title}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen

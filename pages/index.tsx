@@ -7,7 +7,7 @@ import Contact from "../components/Contact";
 
 const IndexPage: NextPage = () => {
   return (
-    <Layout title="Portfolio | John Doe">
+    <Layout title="Portfolio | Povel Croona">
       <Hero />
       <Projects />
       <About />

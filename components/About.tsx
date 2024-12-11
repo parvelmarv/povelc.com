@@ -37,6 +37,21 @@ const About: React.FC = () => {
             </div>
           </div>
         </div>
+        
+        <div className="text-center mt-12 mb-8">
+          <h2 className="text-2xl font-bold mb-8">This is Povel Croona</h2>
+        </div>
+
+        <div className="relative w-48 h-48 mx-auto mb-8">
+          {/* Peachy gradient background */}
+          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-orange-200 via-orange-300 to-orange-400"></div>
+          {/* Profile image */}
+          <img
+            src="/images/povel.png"
+            alt="Povel Croona"
+            className="absolute inset-0 w-full h-full object-cover rounded-full p-1"
+          />
+        </div>
       </div>
     </section>
   );
