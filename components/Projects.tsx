@@ -54,7 +54,7 @@ const Projects: React.FC = () => {
       id: 2,
       title: "We're home!",
       description: "Ambient drones transition into a cinematic orchestral piece",
-      longDescription: "An original composition created for a sci-fi themed environment, specifically focusing on transition from rubato into á tempo. Also worked on melody delivery from the horns to the flutes. I’m currently working on extending this piece with a section where the strings move it to a fast-pace ostinato.",
+      longDescription: "An original composition created for a sci-fi themed environment, specifically focusing on transition from rubato into á tempo. Also worked on melody delivery from the horns to the flutes. I'm currently working on extending this piece with a section where the strings move it to a fast-pace ostinato.",
       instrumentation: ["Drone (Gmin)", "Violins x3", "Cello", "Bass", "Flutes", "Horns", "Harp"],
       imageUrl: "/projects/youtube.jpg",
       category: "music",
@@ -63,52 +63,42 @@ const Projects: React.FC = () => {
     },
     {
       id: 3,
+      title: "Dungeon - Level Design",
+      description: "A showcase of dungeon level design and combination of blueprints and c++",
+      longDescription: "An extensive dungeon level designed and developed in Unreal Engine 5. This project focuses on creating an immersive environment with dynamic lighting, atmospheric effects, and interactive elements. The level features carefully crafted spaces that balance aesthetics with gameplay functionality, incorporating principles of player guidance, pacing, and environmental storytelling. Special attention was given to lighting design, material systems, and performance optimization.",
+      category: "games",
+      tags: ["Level Design", "UE5", "Tags", "Blueprints"],
+      videoUrl: "knZdPb-aBOg",
+      imageUrl: "/projects/dungeon/0_dungeon.png"
+    },
+    {
+      id: 4,
       title: "Turrets & Tanks",
-      description: "2D tank battle game with physics-based combat",
-      longDescription: "A physics-driven tank combat game developed in Unreal Engine 5. The game features realistic projectile physics, dynamic damage systems, and interactive environments. Players can engage in intense battles with various tank types, each offering unique abilities and playstyles. The project showcases advanced physics implementation, AI behavior programming, and complex game mechanics all working together to create an engaging combat experience.",
+      description: "A small 3D tank game featuring enemy AI and independent control over steering and shooting",
+      longDescription: "This demo showcases a Turrets & Tanks game, featuring a full gameplay lifecycle with win/loss conditions. The movement logic and enemy AI are implemented in C++, while Blueprint is used to seamlessly integrate systems and provide an intuitive interface for Game Designers to adjust parameters directly within Unreal Engine. The tank’s chassis and turret move independently, utilizing both WASD for directional movement and mouse input for turret aiming and control.",
       category: "games",
       tags: ["Unreal Engine 5", "C++", "Blueprints", "Game Physics"],
       videoUrl: "MIJztwSg2-s",
       imageUrl: "/projects/game1.jpg"
     },
     {
-      id: 4,
-      title: "UE - Gameplay Ability System",
-      description: "Implementation of gameplay mechanics using Unreal Engine's GAS",
-      longDescription: "A deep dive into Unreal Engine's Gameplay Ability System (GAS). This project showcases the implementation of various gameplay mechanics including: custom abilities with different activation methods, gameplay effects for managing buffs and debuffs, attribute sets for handling character stats, and ability tasks for complex gameplay sequences. The system demonstrates both C++ and Blueprint integration for maximum flexibility.",
+      id: 5,
+      title: "Unreal Engine - GAS",
+      description: "Generic implementation of the unreal engines Gamplay Ability System",
+      longDescription: "This project showcases the implementation of Unreal Engine's Gameplay Ability System (GAS), setting up basic player attributes (Health, Mana) and using Gameplay Effects to apply various healing and damage effects, both instant and over-time sources. Finally, the changes are mapped to UI widgets showing the effect taking place.",
       category: "games",
       tags: ["Unreal Engine 5", "C++", "GAS", "Blueprints"],
       videoUrl: "uP7LmYKwXc0",
       imageUrl: "/projects/game1.jpg"
     },
     {
-      id: 5,
+      id: 6,
       title: "This Website",
       description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
       longDescription: "A modern, responsive portfolio website built using Next.js, TypeScript, and Tailwind CSS. The site features a clean, intuitive design with smooth animations and transitions. It showcases various projects through an interactive gallery system with modal views for detailed information. The development focused on performance optimization, accessibility, and maintainable code structure.",
       imageUrl: "/images/portfolio.png",
       category: "other",
       tags: ["Next.js", "TypeScript", "Tailwind CSS"]
-    },
-    {
-      id: 6,
-      title: "Ascii-Art",
-      description: "Convert images to ASCII art using Python",
-      longDescription: "A Python-based tool that transforms regular images into ASCII art. The program analyzes image brightness values and maps them to appropriate ASCII characters to create detailed text-based representations. Features include customizable character sets, adjustable output size, and support for various image formats. The project demonstrates image processing techniques and creative algorithmic thinking.",
-      imageUrl: "/projects/code2.jpg",
-      category: "other",
-      tags: ["Python", "Image Processing", "ASCII"],
-      videoUrl: "vaMY0zMFZAM"
-    },
-    {
-      id: 7,
-      title: "Dungeon - Level Design",
-      description: "A showcase of dungeon level design and development",
-      longDescription: "An extensive dungeon level designed and developed in Unreal Engine 5. This project focuses on creating an immersive environment with dynamic lighting, atmospheric effects, and interactive elements. The level features carefully crafted spaces that balance aesthetics with gameplay functionality, incorporating principles of player guidance, pacing, and environmental storytelling. Special attention was given to lighting design, material systems, and performance optimization.",
-      category: "games",
-      tags: ["Level Design", "UE5", "Tags", "Blueprints"],
-      videoUrl: "knZdPb-aBOg",
-      imageUrl: "/projects/dungeon/0_dungeon.png"
     }
   ];
 
