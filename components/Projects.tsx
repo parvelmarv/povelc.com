@@ -9,6 +9,7 @@ type ProjectType = {
   instrumentation?: string[];
   codeBreakdown?: string;
   imageUrl: string;
+  cardImageUrl?: string;
   category: 'music' | 'games' | 'other';
   tags: string[];
   videoUrl?: string;
@@ -51,7 +52,7 @@ const Projects: React.FC = () => {
       id: 1,
       title: "Take a walk",
       description: "Orchestra composition for a mystical mushroom environment",
-      longDescription: "Got to compose to some environment art created by the amazing Leo Brynielsson (check out his work here). This piece originally started out with a marimba sound, but during the process, I switched to a piano with some delay and moved the marimba back to a rhythm section. Particularly happy with the tempo alterations.",
+      longDescription: "Got to compose to some environment art created by the amazing [Leo Brynielsson](https://www.artstation.com/leozy/profile). This piece originally started out with a marimba sound, but during the process, I switched to a piano with some delay and moved the marimba back to a rhythm section. Particularly happy with the tempo alterations.",
       instrumentation: ["Piano with Delay", "Violin x2", "Viola", "Cello", "Bass",  "Woodwinds", "Horn", "Marimba"],
       imageUrl: "/projects/youtube.jpg",
       category: "music",
@@ -62,7 +63,7 @@ const Projects: React.FC = () => {
       id: 2,
       title: "We're home!",
       description: "Ambient drones transition into a cinematic orchestral piece",
-      longDescription: "An original composition created for a sci-fi themed environment, specifically focusing on transition from rubato into á tempo. Also worked on melody delivery from the horns to the flutes. I'm currently working on extending this piece with a section where the strings move it to a fast-pace ostinato.",
+      longDescription: "An original composition created for a sci-fi themed environment made by [Leo Brynielsson](https://www.artstation.com/leozy/profile), specifically focusing on transition from rubato into á tempo. Also worked on melody delivery from the horns to the flutes. I'm currently working on extending this piece with a section where the strings move it to a fast-pace ostinato.",
       instrumentation: ["Drone (Gmin)", "Violins x3", "Cello", "Bass", "Flutes", "Horns", "Harp"],
       imageUrl: "/projects/youtube.jpg",
       category: "music",
@@ -107,13 +108,14 @@ const Projects: React.FC = () => {
       longDescription: "A modern, responsive portfolio website built using Next.js, TypeScript, and Tailwind CSS. The site features a clean, intuitive design with smooth animations and transitions. It showcases various projects through an interactive gallery system with modal views for detailed information. The development focused on performance optimization, accessibility, and maintainable code structure.",
       codeBreakdown: "Built with Next.js for server-side rendering and optimal performance. Uses TypeScript for type safety and better development experience. Styled with Tailwind CSS for rapid UI development and consistent design. Features include dynamic project filtering, modal views with markdown support, and responsive design principles.",
       imageUrl: "/images/portfolio.png",
+      cardImageUrl: "/projects/Website_cardimage.png",
       category: "other",
       tags: ["Next.js", "TypeScript", "Tailwind CSS"]
     },
     {
       id: 7,
       title: "Ascii-Webcam",
-      description: "Using openCV to convert a live stream from my webcam to ASCII. ",
+      description: "Using openCV to convert a live stream from my webcam to ASCII in real time. ",
       longDescription: "This coding project transforms a continuous webcam stream into ASCII characters. **Best viewed in full screen** to see the characters clearly. Currently working on adding a Sobel-filter to add more rigid lines with the _\\\/| characters. ",
       codeBreakdown: "In short, the image is read and then scaled down to 1/8 resolution. After that, the image is resized to the original size, giving a pixel size of 8x8, which is a good size for the ASCII characters. The image is grayscaled and quantized into 8 distinct luminance values, which are mapped to characters from the string “ .:opOP#@”. Brighter values are represented by characters that take up more space, creating a shadow effect and adding depth to the final output.",
       imageUrl: "/projects/code2.jpg",
@@ -202,9 +204,9 @@ const Projects: React.FC = () => {
                             ) : (
                               <div className="aspect-video">
                                 <img
-                                  src={project.imageUrl}
+                                  src={project.cardImageUrl || project.imageUrl}
                                   alt={project.title}
-                                  className={`w-full h-full object-cover`}
+                                  className="w-full h-full object-cover"
                                 />
                               </div>
                             )}
@@ -331,7 +333,19 @@ const Projects: React.FC = () => {
 
               {/* Description */}
               <div className="mb-4">
-                <ReactMarkdown className="text-gray-600 mb-4 prose">
+                <ReactMarkdown 
+                  className="text-gray-600 mb-4 prose"
+                  components={{
+                    a: ({node, ...props}) => (
+                      <a 
+                        {...props} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="text-blue-600 hover:text-blue-800 underline"
+                      />
+                    )
+                  }}
+                >
                   {selectedProject.longDescription || selectedProject.description}
                 </ReactMarkdown>
               </div>
