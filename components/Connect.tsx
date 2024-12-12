@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Contact: React.FC = () => {
+const Connect: React.FC = () => {
   return (
-    <section id="contact" className="py-20">
+    <section id="connect" className="py-20">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-6">Let's Connect!</h2>
         <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
@@ -25,4 +25,4 @@ const Contact: React.FC = () => {
   );
 };
 
-export default Contact; 
+export default Connect; 

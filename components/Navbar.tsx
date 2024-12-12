@@ -16,11 +16,11 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/#projects" className="text-gray-200 hover:text-orange-300 transition-colors">
+            <Link href="/#projects" className="text-gray-200 hover:text-orange-300 transition-colors font-bold">
               Projects
             </Link>
-            <Link href="/#contact" className="text-gray-200 hover:text-orange-300 transition-colors">
-              Contact
+            <Link href="/#connect" className="text-gray-200 hover:text-orange-300 transition-colors font-bold">
+              Connect
             </Link>
           </div>
 
@@ -45,8 +45,8 @@ const Navbar: React.FC = () => {
               <Link href="/#projects" className="block text-gray-200 hover:text-orange-300 transition-colors py-2">
                 Projects
               </Link>
-              <Link href="/#contact" className="block text-gray-200 hover:text-orange-300 transition-colors py-2">
-                Contact
+              <Link href="/#connect" className="block text-gray-200 hover:text-orange-300 transition-colors py-2">
+                Connect
               </Link>
             </div>
           </div>

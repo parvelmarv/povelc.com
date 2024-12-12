@@ -21,16 +21,23 @@ const Hero: React.FC = () => {
             </p>
             <div className="flex gap-4">
               <a 
-                href="#contact" 
-                className="btn btn-primary"
+                href="#connect" 
+                className="group inline-flex items-center gap-3 bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-full transition-all duration-300 font-semibold"
               >
-                Contact Me
-              </a>
-              <a 
-                href="#projects" 
-                className="btn btn-secondary"
-              >
-                View Projects
+                <span>Let's Connect</span>
+                <svg 
+                  className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
+                  />
+                </svg>
               </a>
             </div>
           </div>
@@ -51,8 +58,8 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-      <div className="absolute -bottom-[2px] left-0 w-full h-[4px] bg-gradient-to-b from-gray-100 to-white"></div>
+      <div className="absolute bottom-0 left-0 w-full h-[4px] bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+      <div className="absolute -bottom-[4px] left-0 w-full h-[8px] bg-gradient-to-b from-gray-100 to-white"></div>
     </section>
   );
 };

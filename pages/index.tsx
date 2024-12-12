@@ -2,16 +2,14 @@ import type { NextPage } from 'next';
 import Layout from "../components/Layout";
 import Hero from "../components/Hero";
 import Projects from "../components/Projects";
-import About from "../components/About";
-import Contact from "../components/Contact";
+import Connect from "../components/Connect";
 
 const IndexPage: NextPage = () => {
   return (
     <Layout title="Portfolio | Povel Croona">
       <Hero />
       <Projects />
-      <About />
-      <Contact />
+      <Connect />
     </Layout>
   );
 };
