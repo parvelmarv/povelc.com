@@ -12,12 +12,10 @@ const Hero: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1 text-left">
             <h1 className="text-4xl font-bold mb-6">
-              This is me
+              Hello!
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              I'm Povel — a program and project manager by trade, with experience leading initiatives at companies like Spotify. 
-              Over the past year, I've embraced the opportunity to explore creative passions, diving into composing, game development, 
-              and other side projects. Below you can find a few of the things I've been working on lately. 
+            I’m Povel, a program and project manager by trade, with experience leading initiatives at companies like Spotify. While I’ve always had a passion for programming and hands-on projects, over the past year, I’ve been dedicating even more time to exploring my creative side—diving deeper into composing, game development, and various side projects. Below, you can find a few of the things I’ve been working on lately.
             </p>
             <div className="flex gap-4">
               <a 

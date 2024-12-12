@@ -73,9 +73,9 @@ const Projects: React.FC = () => {
       id: 3,
       title: "Dungeon - Level Design",
       description: "A showcase of dungeon level design and combination of blueprints and c++",
-      longDescription: "An extensive dungeon level designed and developed in Unreal Engine 5. This project focuses on creating an immersive environment with dynamic lighting, atmospheric effects, and interactive elements. The level features carefully crafted spaces that balance aesthetics with gameplay functionality, incorporating principles of player guidance, pacing, and environmental storytelling. Special attention was given to lighting design, material systems, and performance optimization.",
+      longDescription: "A level design project where I used modular blocks to create a dungeon featuring a hidden door leading to a crypt. Custom C++ classes handle object grabbing and movement through the Enhanced Input System. A trigger and tag system determines whether doors and secret areas should be open/opening or closed/closing.",
       category: "games",
-      tags: ["Level Design", "UE5", "Tags", "Blueprints"],
+      tags: ["Level Design", "C++", "Tags", "Blueprints"],
       videoUrl: "knZdPb-aBOg",
       imageUrl: "/projects/dungeon/0_dungeon.png"
     },
@@ -96,23 +96,11 @@ const Projects: React.FC = () => {
       longDescription: "This project showcases the implementation of Unreal Engine's Gameplay Ability System (GAS), setting up basic player attributes (Health, Mana) and using Gameplay Effects to apply various healing and damage effects, both instant and over-time sources. Finally, the changes are mapped to UI widgets showing the effect taking place.",
       category: "games",
       tags: ["Unreal Engine 5", "C++", "GAS", "Blueprints"],
-      videoUrl: "uP7LmYKwXc0",
+      videoUrl: "GLvuUBskYTo",
       imageUrl: "/projects/game1.jpg"
     },
-
     {
       id: 6,
-      title: "This Website",
-      description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
-      longDescription: "A modern, responsive portfolio website built using Next.js, TypeScript, and Tailwind CSS. The site features a clean, intuitive design with smooth animations and transitions. It showcases various projects through an interactive gallery system with modal views for detailed information. The development focused on performance optimization, accessibility, and maintainable code structure.",
-      codeBreakdown: "Built with Next.js for server-side rendering and optimal performance. Uses TypeScript for type safety and better development experience. Styled with Tailwind CSS for rapid UI development and consistent design. Features include dynamic project filtering, modal views with markdown support, and responsive design principles.",
-      imageUrl: "/images/portfolio.png",
-      cardImageUrl: "/projects/Website_cardimage.png",
-      category: "other",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS"]
-    },
-    {
-      id: 7,
       title: "Ascii-Webcam",
       description: "Using openCV to convert a live stream from my webcam to ASCII in real-time. ",
       longDescription: "This coding project transforms a continuous webcam stream into ASCII characters. It is hard-coded for an HD camera, so it's **best viewed in full screen** to see the characters clearly. Currently working on adding a Sobel-filter to add more rigid lines with the _\\\\/| characters. ",
@@ -122,6 +110,16 @@ const Projects: React.FC = () => {
       tags: ["C++", "CMake", "openCV", "Image processing"],
       videoUrl: "vaMY0zMFZAM",
       githubUrl: "https://github.com/parvelmarv/ascii_webcamstream"
+    },
+    {
+      id: 7,
+      title: "povelc.com",
+      description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
+      longDescription: "A modern, responsive portfolio website built using Next.js, TypeScript, and Tailwind CSS. The site features a clean, intuitive design with smooth animations and transitions. It showcases various projects through an interactive gallery system with modal views for detailed information. The development focused on performance optimization, accessibility, and maintainable code structure.",
+      imageUrl: "/projects/Website_cardimage.png",
+      cardImageUrl: "/projects/Website_cardimage.png",
+      category: "other",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS"]
     }
   ];
 
@@ -262,13 +260,21 @@ const Projects: React.FC = () => {
             <div className="relative">
               <div className="relative pt-[56.25%] bg-black">
                 {currentMediaIndex === 0 ? (
-                  <iframe
-                    className="absolute top-0 left-0 w-full h-full"
-                    src={`https://www.youtube.com/embed/${selectedProject.videoUrl}?autoplay=1`}
-                    title={selectedProject.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+                  selectedProject.videoUrl ? (
+                    <iframe
+                      className="absolute top-0 left-0 w-full h-full"
+                      src={`https://www.youtube.com/embed/${selectedProject.videoUrl}?autoplay=1`}
+                      title={selectedProject.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <img
+                      src={selectedProject.cardImageUrl || selectedProject.imageUrl}
+                      alt={selectedProject.title}
+                      className="absolute top-0 left-0 w-full h-full object-contain bg-white"
+                    />
+                  )
                 ) : (
                   <img
                     src={selectedProject.additionalScreenshots?.[currentMediaIndex - 1]}
