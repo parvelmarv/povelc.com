@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 
 type ProjectType = {
   id: number;
@@ -6,11 +7,18 @@ type ProjectType = {
   description: string;
   longDescription?: string;
   instrumentation?: string[];
+  codeBreakdown?: string;
   imageUrl: string;
   category: 'music' | 'games' | 'other';
   tags: string[];
   videoUrl?: string;
-  codeSnippets?: string[];
+  additionalScreenshots?: string[];
+  keyFeatures?: string[];
+  codeSnippets?: {
+    title: string;
+    language: string;
+    code: string;
+  }[];
 };
 
 const Projects: React.FC = () => {
@@ -75,7 +83,7 @@ const Projects: React.FC = () => {
       id: 4,
       title: "Turrets & Tanks",
       description: "A small 3D tank game featuring enemy AI and independent control over steering and shooting",
-      longDescription: "This demo showcases a Turrets & Tanks game, featuring a full gameplay lifecycle with win/loss conditions. The movement logic and enemy AI are implemented in C++, while Blueprint is used to seamlessly integrate systems and provide an intuitive interface for Game Designers to adjust parameters directly within Unreal Engine. The tank’s chassis and turret move independently, utilizing both WASD for directional movement and mouse input for turret aiming and control.",
+      longDescription: "This demo showcases a Turrets & Tanks game, featuring a full gameplay lifecycle with win/loss conditions. The movement logic and enemy AI are implemented in C++, while Blueprint is used to seamlessly integrate systems and provide an intuitive interface for Game Designers to adjust parameters directly within Unreal Engine. The tank's chassis and turret move independently, utilizing both WASD for directional movement and mouse input for turret aiming and control.",
       category: "games",
       tags: ["Unreal Engine 5", "C++", "Blueprints", "Game Physics"],
       videoUrl: "MIJztwSg2-s",
@@ -91,14 +99,27 @@ const Projects: React.FC = () => {
       videoUrl: "uP7LmYKwXc0",
       imageUrl: "/projects/game1.jpg"
     },
+
     {
       id: 6,
       title: "This Website",
       description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
       longDescription: "A modern, responsive portfolio website built using Next.js, TypeScript, and Tailwind CSS. The site features a clean, intuitive design with smooth animations and transitions. It showcases various projects through an interactive gallery system with modal views for detailed information. The development focused on performance optimization, accessibility, and maintainable code structure.",
+      codeBreakdown: "Built with Next.js for server-side rendering and optimal performance. Uses TypeScript for type safety and better development experience. Styled with Tailwind CSS for rapid UI development and consistent design. Features include dynamic project filtering, modal views with markdown support, and responsive design principles.",
       imageUrl: "/images/portfolio.png",
       category: "other",
       tags: ["Next.js", "TypeScript", "Tailwind CSS"]
+    },
+    {
+      id: 7,
+      title: "Ascii-Webcam",
+      description: "Using openCV to convert a live stream from my webcam to ASCII. ",
+      longDescription: "This coding project transforms a continuous webcam stream into ASCII characters. **Best viewed in full screen** to see the characters clearly. Currently working on adding a Sobel-filter to add more rigid lines with the _\\\/| characters. ",
+      codeBreakdown: "In short, the image is read and then scaled down to 1/8 resolution. After that, the image is resized to the original size, giving a pixel size of 8x8, which is a good size for the ASCII characters. The image is grayscaled and quantized into 8 distinct luminance values, which are mapped to characters from the string “ .:opOP#@”. Brighter values are represented by characters that take up more space, creating a shadow effect and adding depth to the final output.",
+      imageUrl: "/projects/code2.jpg",
+      category: "other",
+      tags: ["C++", "CMake", "openCV", "image processing"],
+      videoUrl: "vaMY0zMFZAM"
     }
   ];
 
@@ -183,7 +204,7 @@ const Projects: React.FC = () => {
                                 <img
                                   src={project.imageUrl}
                                   alt={project.title}
-                                  className="w-full h-full object-cover"
+                                  className={`w-full h-full object-cover`}
                                 />
                               </div>
                             )}
@@ -248,7 +269,7 @@ const Projects: React.FC = () => {
                   <img
                     src={selectedProject.additionalScreenshots?.[currentMediaIndex - 1]}
                     alt={`${selectedProject.title} screenshot ${currentMediaIndex}`}
-                    className="absolute top-0 left-0 w-full h-full object-contain"
+                    className={`absolute top-0 left-0 w-full h-full object-contain`}
                   />
                 )}
               </div>
@@ -310,9 +331,9 @@ const Projects: React.FC = () => {
 
               {/* Description */}
               <div className="mb-4">
-                <p className="text-gray-600 mb-4">
+                <ReactMarkdown className="text-gray-600 mb-4 prose">
                   {selectedProject.longDescription || selectedProject.description}
-                </p>
+                </ReactMarkdown>
               </div>
 
               {/* Instrumentation Section for Music Projects */}
@@ -324,6 +345,18 @@ const Projects: React.FC = () => {
                       <li key={index}>{instrument}</li>
                     ))}
                   </ul>
+                </div>
+              )}
+
+              {/* Code Breakdown Section for Other Projects */}
+              {selectedProject.category === 'other' && selectedProject.codeBreakdown && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-semibold mb-3">Code Breakdown</h3>
+                  <div className="text-gray-600">
+                    <ReactMarkdown className="prose">
+                      {selectedProject.codeBreakdown}
+                    </ReactMarkdown>
+                  </div>
                 </div>
               )}
 
