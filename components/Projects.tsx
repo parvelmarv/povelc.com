@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 
 interface ProjectType {
+  id: number;
   title: string;
   description: string;
   longDescription?: string;
@@ -11,6 +12,7 @@ interface ProjectType {
   category: 'music' | 'games' | 'other';
   videoUrl?: string;
   instrumentation?: string[];
+  additionalScreenshots?: string[];
   codeBreakdown?: string;
   keyFeatures?: string[];
   codeSnippets?: {
