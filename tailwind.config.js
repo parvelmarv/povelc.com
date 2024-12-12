@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        'dancing-script': ['Dancing Script', 'cursive'],
       },
     },
   },

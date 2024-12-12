@@ -4,6 +4,8 @@ type ProjectType = {
   id: number;
   title: string;
   description: string;
+  longDescription?: string;
+  instrumentation?: string[];
   imageUrl: string;
   category: 'music' | 'games' | 'other';
   tags: string[];
@@ -39,178 +41,74 @@ const Projects: React.FC = () => {
   const projects: ProjectType[] = [
     {
       id: 1,
-      title: "Mushroom Environment",
+      title: "Mushroom Forest",
       description: "Collab where I got to compose some music for an environment art",
+      longDescription: "Got to compose to some environment art created by the amazing Leo Brynielsson (check out his work here). This piece originally started out with a marimba sound, but during the process, I switched to a piano with some delay and moved the marimba back to a rhythm section. Particularly happy with the tempo alterations.",
+      instrumentation: ["Piano with Delay", "Violin x2", "Viola", "Cello", "Bass",  "Woodwinds", "Horn", "Marimba"],
       imageUrl: "/projects/youtube.jpg",
       category: "music",
-      tags: ["Music Production", "Studio One", "Orchestral", "Composition"],
-      videoUrl: "dixpQ3kq6gI",
-      codeSnippets: [
-        {
-          title: "Grabber System",
-          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
-{
-    FVector Start = GetComponentLocation();
-    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
-
-    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
-    
-    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
-    bool HasHit;
-    
-    return HasHit = GetWorld()->SweepSingleByChannel(
-        OutHitResult,
-        Start, End, 
-        FQuat::Identity,
-        ECC_GameTraceChannel2,
-        Sphere
-    );
-}`
-        }
-      ]
+      tags: ["Cubase", "Orchestra samples", "Marimba", "Dreamy"],
+      videoUrl: "dixpQ3kq6gI"
     },
     {
       id: 2,
       title: "Space Landing",
       description: "Music composition for a sci-fi themed environment",
+      longDescription: "An original composition created for a sci-fi themed environment, specifically focusing on a space landing sequence. The music combines electronic and orchestral elements to capture the wonder and tension of space exploration. The piece features evolving synthesizer textures, cinematic percussion, and orchestral elements that build to create a sense of arrival and discovery.",
+      instrumentation: ["Synthesizers", "Electronic Elements", "Orchestral Elements", "Cinematic Percussion"],
       imageUrl: "/projects/youtube.jpg",
       category: "music",
       tags: ["Music Production", "Studio One", "Sci-Fi", "Ambient"],
-      videoUrl: "-V-H7jbXY3o",
-      codeSnippets: [
-        {
-          title: "Grabber System",
-          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
-{
-    FVector Start = GetComponentLocation();
-    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
-
-    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
-    
-    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
-    bool HasHit;
-    
-    return HasHit = GetWorld()->SweepSingleByChannel(
-        OutHitResult,
-        Start, End, 
-        FQuat::Identity,
-        ECC_GameTraceChannel2,
-        Sphere
-    );
-}`
-        }
-      ]
+      videoUrl: "-V-H7jbXY3o"
     },
     {
       id: 3,
       title: "Turrets & Tanks",
       description: "2D tank battle game with physics-based combat",
-      imageUrl: "/projects/game1.jpg",
+      longDescription: "A physics-driven tank combat game developed in Unreal Engine 5. The game features realistic projectile physics, dynamic damage systems, and interactive environments. Players can engage in intense battles with various tank types, each offering unique abilities and playstyles. The project showcases advanced physics implementation, AI behavior programming, and complex game mechanics all working together to create an engaging combat experience.",
       category: "games",
       tags: ["Unreal Engine 5", "C++", "Blueprints", "Game Physics"],
       videoUrl: "MIJztwSg2-s",
-      codeSnippets: [
-        {
-          title: "Grabber System",
-          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
-{
-    FVector Start = GetComponentLocation();
-    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
-
-    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
-    
-    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
-    bool HasHit;
-    
-    return HasHit = GetWorld()->SweepSingleByChannel(
-        OutHitResult,
-        Start, End, 
-        FQuat::Identity,
-        ECC_GameTraceChannel2,
-        Sphere
-    );
-}`
-        }
-      ]
+      imageUrl: "/projects/game1.jpg"
     },
     {
       id: 4,
-      title: "UE - Gameplay Ability System (GAS)",
-      description: "Implementation of advanced gameplay mechanics using Unreal Engine's GAS framework",
-      imageUrl: "/projects/game1.jpg",
+      title: "UE - Gameplay Ability System",
+      description: "Implementation of gameplay mechanics using Unreal Engine's GAS",
+      longDescription: "A deep dive into Unreal Engine's Gameplay Ability System (GAS). This project showcases the implementation of various gameplay mechanics including: custom abilities with different activation methods, gameplay effects for managing buffs and debuffs, attribute sets for handling character stats, and ability tasks for complex gameplay sequences. The system demonstrates both C++ and Blueprint integration for maximum flexibility.",
       category: "games",
       tags: ["Unreal Engine 5", "C++", "GAS", "Blueprints"],
-      codeSnippets: [
-        {
-          title: "Grabber System",
-          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
-{
-    FVector Start = GetComponentLocation();
-    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
-
-    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
-    
-    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
-    bool HasHit;
-    
-    return HasHit = GetWorld()->SweepSingleByChannel(
-        OutHitResult,
-        Start, End, 
-        FQuat::Identity,
-        ECC_GameTraceChannel2,
-        Sphere
-    );
-}`
-        }
-      ]
+      videoUrl: "uP7LmYKwXc0",
+      imageUrl: "/projects/game1.jpg"
     },
     {
       id: 5,
       title: "This Website",
       description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
+      longDescription: "A modern, responsive portfolio website built using Next.js, TypeScript, and Tailwind CSS. The site features a clean, intuitive design with smooth animations and transitions. It showcases various projects through an interactive gallery system with modal views for detailed information. The development focused on performance optimization, accessibility, and maintainable code structure.",
       imageUrl: "/images/portfolio.png",
       category: "other",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+      tags: ["Next.js", "TypeScript", "Tailwind CSS"]
     },
     {
       id: 6,
       title: "Ascii-Art",
       description: "Convert images to ASCII art using Python",
+      longDescription: "A Python-based tool that transforms regular images into ASCII art. The program analyzes image brightness values and maps them to appropriate ASCII characters to create detailed text-based representations. Features include customizable character sets, adjustable output size, and support for various image formats. The project demonstrates image processing techniques and creative algorithmic thinking.",
       imageUrl: "/projects/code2.jpg",
       category: "other",
       tags: ["Python", "Image Processing", "ASCII"],
+      videoUrl: "vaMY0zMFZAM"
     },
     {
       id: 7,
       title: "Dungeon - Level Design",
       description: "A showcase of dungeon level design and development",
-      imageUrl: "/projects/dungeon/0_dungeon.png",
+      longDescription: "An extensive dungeon level designed and developed in Unreal Engine 5. This project focuses on creating an immersive environment with dynamic lighting, atmospheric effects, and interactive elements. The level features carefully crafted spaces that balance aesthetics with gameplay functionality, incorporating principles of player guidance, pacing, and environmental storytelling. Special attention was given to lighting design, material systems, and performance optimization.",
       category: "games",
       tags: ["Level Design", "UE5", "Tags", "Blueprints"],
       videoUrl: "knZdPb-aBOg",
-      codeSnippets: [
-        {
-          title: "Grabber System",
-          code: `bool UGrabber::GetGrabbableinReach(FHitResult& OutHitResult) const
-{
-    FVector Start = GetComponentLocation();
-    FVector End = Start + GetForwardVector() * MaxGrabberDistance;
-
-    DrawDebugLine(GetWorld(), Start, End, FColor::Orange);
-    
-    FCollisionShape Sphere = FCollisionShape::MakeSphere(GrabRadius);
-    bool HasHit;
-    
-    return HasHit = GetWorld()->SweepSingleByChannel(
-        OutHitResult,
-        Start, End, 
-        FQuat::Identity,
-        ECC_GameTraceChannel2,
-        Sphere
-    );
-}`
-        }
-      ]
+      imageUrl: "/projects/dungeon/0_dungeon.png"
     }
   ];
 
@@ -228,95 +126,98 @@ const Projects: React.FC = () => {
   return (
     <>
       <section id="projects" className="py-20">
-        <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">
-            My Projects
-          </h2>
-          
-          {/* Tab Navigation */}
-          <div className="relative mb-12">
-            <nav className="relative flex justify-center space-x-8">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`nav-item relative px-4 py-2 ${
-                    activeTab === tab.id ? 'text-yellow-400' : 'text-gray-600 hover:text-yellow-400'
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-              {/* Sliding highlight */}
-              <div
-                className="absolute bottom-0 h-1 bg-yellow-400 transition-all duration-300 ease-in-out"
-                style={{
-                  left: `${tabs.findIndex(tab => tab.id === activeTab) * (100 / tabs.length)}%`,
-                  width: `${100 / tabs.length}%`,
-                }}
-              />
-            </nav>
-          </div>
+        <div className="max-w-5xl mx-auto px-4">
+          {/* Folder System */}
+          <div className="relative">
+            {/* Stacked Folders */}
+            <div className="relative">
+              {/* Active Folder */}
+              <div className="relative">
+                {/* Folder Tabs */}
+                <div className="flex gap-1 relative z-10">
+                  {tabs.map((tab, index) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`
+                        px-8 py-3 text-xl font-bold rounded-t-lg transition-all duration-300
+                        ${activeTab === tab.id 
+                          ? 'bg-white text-black border-t border-l border-r border-gray-200 shadow-[4px_4px_8px_rgba(0,0,0,0.1),-4px_4px_8px_rgba(0,0,0,0.1)] relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-white after:z-20' 
+                          : 'bg-gray-50 text-gray-400 hover:text-gray-600 transform -translate-y-1'
+                        }
+                      `}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
 
-          {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects
-              .filter(project => project.category === activeTab)
-              .map((project, index) => (
-                <button 
-                  key={index}
-                  onClick={() => openModal(project)}
-                  className="text-left w-full bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
-                >
-                  <div className="h-48 bg-gray-200 relative overflow-hidden">
-                    {project.videoUrl ? (
-                      <div className="relative w-full h-full group">
-                        <img
-                          src={`https://img.youtube.com/vi/${project.videoUrl}/maxresdefault.jpg`}
-                          alt={project.title}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            // Fallback to medium quality if maxres is not available
-                            (e.target as HTMLImageElement).src = 
-                              `https://img.youtube.com/vi/${project.videoUrl}/mqdefault.jpg`;
-                          }}
-                        />
-                        <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300">
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <svg 
-                              className="w-16 h-16 text-white opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                            >
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    ) : (
-                      <img
-                        src={project.imageUrl}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    )}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-gray-600 mb-4">{project.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, tagIndex) => (
-                        <span 
-                          key={tagIndex}
-                          className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full"
+                {/* Folder Content */}
+                <div className="relative -mt-[1px] bg-white rounded-b-lg rounded-tr-lg border border-gray-200 p-8 shadow-[0_8px_16px_-4px_rgba(0,0,0,0.1)]">
+                  {/* Projects Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projects
+                      .filter(project => project.category === activeTab)
+                      .map((project, index) => (
+                        <button 
+                          key={index}
+                          onClick={() => openModal(project)}
+                          className="text-left w-full bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
                         >
-                          {tag}
-                        </span>
+                          <div className="relative">
+                            {project.videoUrl ? (
+                              <div className="relative aspect-video group">
+                                <img
+                                  src={`https://img.youtube.com/vi/${project.videoUrl}/maxresdefault.jpg`}
+                                  alt={project.title}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    (e.target as HTMLImageElement).src = 
+                                      `https://img.youtube.com/vi/${project.videoUrl}/mqdefault.jpg`;
+                                  }}
+                                />
+                                <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300">
+                                  <div className="absolute inset-0 flex items-center justify-center">
+                                    <svg 
+                                      className="w-16 h-16 text-white opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                                      viewBox="0 0 24 24"
+                                      fill="currentColor"
+                                    >
+                                      <path d="M8 5v14l11-7z"/>
+                                    </svg>
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="aspect-video">
+                                <img
+                                  src={project.imageUrl}
+                                  alt={project.title}
+                                  className="w-full h-full object-cover"
+                                />
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4">
+                            <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                            <p className="text-gray-600 mb-4">{project.description}</p>
+                            <div className="flex flex-wrap gap-2">
+                              {project.tags.map((tag, tagIndex) => (
+                                <span 
+                                  key={tagIndex}
+                                  className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full"
+                                >
+                                  {tag}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        </button>
                       ))}
-                    </div>
                   </div>
-                </button>
-            ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -419,21 +320,22 @@ const Projects: React.FC = () => {
 
               {/* Description */}
               <div className="mb-4">
-                <h3 className="text-xl font-semibold mb-3">Description</h3>
                 <p className="text-gray-600 mb-4">
                   {selectedProject.longDescription || selectedProject.description}
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tags.map((tag, index) => (
-                    <span 
-                      key={index}
-                      className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
               </div>
+
+              {/* Instrumentation Section for Music Projects */}
+              {selectedProject.category === 'music' && selectedProject.instrumentation && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-semibold mb-3">Instrumentation</h3>
+                  <ul className="list-disc list-inside text-gray-600 space-y-1">
+                    {selectedProject.instrumentation.map((instrument, index) => (
+                      <li key={index}>{instrument}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               {/* Key Features */}
               {selectedProject.keyFeatures && (
@@ -509,6 +411,18 @@ const Projects: React.FC = () => {
                   </div>
                 </div>
               )}
+
+              {/* Tags at the bottom */}
+              <div className="flex flex-wrap gap-2 mt-8">
+                {selectedProject.tags.map((tag, index) => (
+                  <span 
+                    key={index}
+                    className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
