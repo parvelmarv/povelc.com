@@ -41,8 +41,8 @@ const Projects: React.FC = () => {
   const projects: ProjectType[] = [
     {
       id: 1,
-      title: "Mushroom Forest",
-      description: "Collab where I got to compose some music for an environment art",
+      title: "Take a walk",
+      description: "Orchestra composition for a mystical mushroom environment",
       longDescription: "Got to compose to some environment art created by the amazing Leo Brynielsson (check out his work here). This piece originally started out with a marimba sound, but during the process, I switched to a piano with some delay and moved the marimba back to a rhythm section. Particularly happy with the tempo alterations.",
       instrumentation: ["Piano with Delay", "Violin x2", "Viola", "Cello", "Bass",  "Woodwinds", "Horn", "Marimba"],
       imageUrl: "/projects/youtube.jpg",
@@ -52,13 +52,13 @@ const Projects: React.FC = () => {
     },
     {
       id: 2,
-      title: "Space Landing",
-      description: "Music composition for a sci-fi themed environment",
-      longDescription: "An original composition created for a sci-fi themed environment, specifically focusing on a space landing sequence. The music combines electronic and orchestral elements to capture the wonder and tension of space exploration. The piece features evolving synthesizer textures, cinematic percussion, and orchestral elements that build to create a sense of arrival and discovery.",
-      instrumentation: ["Synthesizers", "Electronic Elements", "Orchestral Elements", "Cinematic Percussion"],
+      title: "We're home!",
+      description: "Ambient drones transition into a cinematic orchestral piece",
+      longDescription: "An original composition created for a sci-fi themed environment, specifically focusing on transition from rubato into á tempo. Also worked on melody delivery from the horns to the flutes. I’m currently working on extending this piece with a section where the strings move it to a fast-pace ostinato.",
+      instrumentation: ["Drone (Gmin)", "Violins x3", "Cello", "Bass", "Flutes", "Horns", "Harp"],
       imageUrl: "/projects/youtube.jpg",
       category: "music",
-      tags: ["Music Production", "Studio One", "Sci-Fi", "Ambient"],
+      tags: ["Cubase", "Orchestra samples", "Ambient", "Epic"],
       videoUrl: "-V-H7jbXY3o"
     },
     {
