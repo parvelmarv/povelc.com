@@ -117,11 +117,11 @@ const Projects: React.FC = () => {
       id: 7,
       title: "povelc.com",
       description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
-      longDescription: "A modern, responsive portfolio website built using Next.js, TypeScript, and Tailwind CSS. The site features a clean, intuitive design with smooth animations and transitions. It showcases various projects through an interactive gallery system with modal views for detailed information. The development focused on performance optimization, accessibility, and maintainable code structure.",
+      longDescription: "A simple, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS, and deployed on Vercel. It has a clean design with basic animations and transitions. The site includes a straightforward gallery to display projects, with modals for more details. The focus was on keeping the code maintainable and ensuring good performance and accessibility.",
       imageUrl: "/projects/Website_cardimage.png",
       cardImageUrl: "/projects/Website_cardimage.png",
       category: "other",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS"]
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"]
     }
   ];
 
@@ -365,7 +365,7 @@ const Projects: React.FC = () => {
                         {...props} 
                         target="_blank" 
                         rel="noopener noreferrer" 
-                        className="text-blue-600 hover:text-blue-800 underline"
+                        className="font-bold underline hover:opacity-80"
                       />
                     )
                   }}
