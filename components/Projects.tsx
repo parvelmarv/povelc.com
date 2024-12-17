@@ -24,7 +24,7 @@ interface ProjectType {
 }
 
 const Projects: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'music' | 'games' | 'other'>('games');
+  const [activeTab, setActiveTab] = useState<'music' | 'games' | 'other'>('music');
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
