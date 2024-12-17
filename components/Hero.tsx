@@ -43,7 +43,7 @@ const Hero: React.FC = () => {
               >
                 <span>Let's Connect</span>
                 <svg 
-                  className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
+                  className="w-5 h-5 transform transition-transform group-hover:translate-y-1" 
                   fill="none" 
                   viewBox="0 0 24 24" 
                   stroke="currentColor"

@@ -79,7 +79,14 @@ const Projects: React.FC = () => {
       category: "games",
       tags: ["Level Design", "C++", "Tags", "Blueprints"],
       videoUrl: "knZdPb-aBOg",
-      imageUrl: "/projects/dungeon/0_dungeon.png"
+      imageUrl: "/projects/dungeon/0_dungeon.png",
+      additionalScreenshots: [
+        "/projects/dungeon/0_dungeon.png",
+        "/projects/dungeon/1_dungeon.png",
+        "/projects/dungeon/2_dungeon.png",
+        "/projects/dungeon/3_dungeon.png",
+        "/projects/dungeon/4_dungeon.png"
+      ]
     },
     {
       id: 4,
@@ -483,7 +490,7 @@ const Projects: React.FC = () => {
                 </div>
               )}
 
-              {/* GitHub Link - Now at the very end */}
+              {/* GitHub Link */}
               {selectedProject.githubUrl && (
                 <div className="mt-8">
                   <a 
@@ -497,6 +504,28 @@ const Projects: React.FC = () => {
                     </svg>
                     View on GitHub
                   </a>
+                </div>
+              )}
+
+              {/* Image Gallery */}
+              {selectedProject.additionalScreenshots && selectedProject.additionalScreenshots.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="text-xl font-semibold mb-4">Gallery</h3>
+                  <div className="grid grid-cols-5 gap-4">
+                    {selectedProject.additionalScreenshots.map((screenshot, index) => (
+                      <div 
+                        key={index} 
+                        className="aspect-video rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity"
+                        onClick={() => setCurrentMediaIndex(selectedProject.videoUrl ? index + 1 : index)}
+                      >
+                        <img
+                          src={screenshot}
+                          alt={`${selectedProject.title} screenshot ${index}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
