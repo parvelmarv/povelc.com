@@ -54,7 +54,7 @@ const Projects: React.FC = () => {
       title: "Take a walk",
       description: "Orchestra composition for a mystical mushroom environment",
       longDescription: "Got to compose to some environment art created by the amazing [Leo Brynielsson](https://www.artstation.com/leozy/profile). This piece originally started out with a marimba sound, but during the process, I switched to a piano with some delay and moved the marimba back to a rhythm section. Particularly happy with the tempo alterations.",
-      instrumentation: ["Piano with Delay", "Violin x2", "Viola", "Cello", "Bass",  "Woodwinds", "Horn", "Marimba"],
+      instrumentation: ["Piano", "Violin x2", "Viola", "Cello", "Bass",  "Woodwinds", "Horn", "Marimba"],
       imageUrl: "/projects/youtube.jpg",
       category: "music",
       tags: ["Cubase", "Orchestra samples", "Marimba", "Dreamy"],
