@@ -25,6 +25,7 @@ interface ProjectType {
 
 const Projects: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'music' | 'games' | 'other'>('music');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
@@ -147,96 +148,129 @@ const Projects: React.FC = () => {
     <>
       <section id="projects" className="py-20 relative">
         <div className="max-w-5xl mx-auto px-4">
-          {/* Folder System */}
-          <div className="relative">
-            {/* Stacked Folders */}
+          {/* Mobile Header with hamburger menu */}
+          <div className="lg:hidden bg-[#1a1e1f] w-full rounded-t-lg px-6 h-16 flex items-center justify-between">
+            <h2 className="text-white text-xl font-bold">Projects</h2>
+            
+            {/* Hamburger Menu */}
             <div className="relative">
-              {/* Active Folder */}
-              <div className="relative">
-                {/* Folder Tabs */}
-                <div className="flex gap-1 relative z-10">
-                  {tabs.map((tab, index) => (
+              <button 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-white p-2"
+              >
+                <div className="w-6 h-5 flex flex-col justify-between">
+                  <span className={`h-0.5 w-full bg-current transform transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                  <span className={`h-0.5 w-full bg-current transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`} />
+                  <span className={`h-0.5 w-full bg-current transform transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+                </div>
+              </button>
+
+              {/* Dropdown Menu */}
+              {isMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg overflow-hidden z-50">
+                  {tabs.map(tab => (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
-                      className={`
-                        px-8 py-3 text-xl font-bold rounded-t-lg transition-all duration-300
-                        ${activeTab === tab.id 
-                          ? 'text-white bg-[#1a1e1f] border-t border-l border-r border-gray-200 shadow-[4px_4px_8px_rgba(0,0,0,0.1),-4px_4px_8px_rgba(0,0,0,0.1)] relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-[#1a1e1f] after:z-20' 
-                          : 'bg-gray-50 text-gray-400 hover:text-gray-600 transform -translate-y-1'
-                        }
-                      `}
+                      onClick={() => {
+                        setActiveTab(tab.id);
+                        setIsMenuOpen(false);
+                      }}
+                      className={`w-full px-4 py-3 text-left transition-colors ${
+                        activeTab === tab.id
+                          ? 'bg-gray-100 text-gray-900'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
                     >
                       {tab.label}
                     </button>
                   ))}
                 </div>
+              )}
+            </div>
+          </div>
 
-                {/* Folder Content */}
-                <div className="relative -mt-[1px] bg-white rounded-b-lg rounded-tr-lg border border-gray-200 p-8 shadow-[0_8px_16px_-4px_rgba(0,0,0,0.1)]">
-                  {/* Projects Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {projects
-                      .filter(project => project.category === activeTab)
-                      .map((project, index) => (
-                        <button 
-                          key={index}
-                          onClick={() => openModal(project)}
-                          className="text-left w-full bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
-                        >
-                          <div className="relative">
-                            {project.videoUrl ? (
-                              <div className="relative aspect-video group">
-                                <img
-                                  src={`https://img.youtube.com/vi/${project.videoUrl}/maxresdefault.jpg`}
-                                  alt={project.title}
-                                  className="w-full h-full object-cover"
-                                  onError={(e) => {
-                                    (e.target as HTMLImageElement).src = 
-                                      `https://img.youtube.com/vi/${project.videoUrl}/mqdefault.jpg`;
-                                  }}
-                                />
-                                <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300">
-                                  <div className="absolute inset-0 flex items-center justify-center">
-                                    <svg 
-                                      className="w-16 h-16 text-white opacity-90 group-hover:opacity-100 transition-opacity duration-300"
-                                      viewBox="0 0 24 24"
-                                      fill="currentColor"
-                                    >
-                                      <path d="M8 5v14l11-7z"/>
-                                    </svg>
-                                  </div>
-                                </div>
-                              </div>
-                            ) : (
-                              <div className="aspect-video">
-                                <img
-                                  src={project.cardImageUrl || project.imageUrl}
-                                  alt={project.title}
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
-                            )}
-                          </div>
-                          <div className="p-4">
-                            <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                            <p className="text-gray-600 mb-4">{project.description}</p>
-                            <div className="flex flex-wrap gap-2">
-                              {project.tags.map((tag, tagIndex) => (
-                                <span 
-                                  key={tagIndex}
-                                  className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
+          {/* Desktop Tabs */}
+          <div className="hidden lg:block relative">
+            <div className="flex gap-1 relative z-10">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`
+                    px-8 py-3 text-xl font-bold rounded-t-lg transition-all duration-300
+                    ${activeTab === tab.id 
+                      ? 'text-white bg-[#1a1e1f] border-t border-l border-r border-gray-200 shadow-[4px_4px_8px_rgba(0,0,0,0.1),-4px_4px_8px_rgba(0,0,0,0.1)] relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[1px] after:bg-[#1a1e1f] after:z-20' 
+                      : 'bg-gray-50 text-gray-400 hover:text-gray-600 transform -translate-y-1'
+                    }
+                  `}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Project Container */}
+          <div className={`relative bg-white rounded-b-lg ${!isMenuOpen ? 'lg:rounded-tr-lg' : ''} border border-gray-200 p-8 shadow-[0_8px_16px_-4px_rgba(0,0,0,0.1)]`}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {projects
+                .filter(project => project.category === activeTab)
+                .map((project, index) => (
+                  <button 
+                    key={index}
+                    onClick={() => openModal(project)}
+                    className="text-left w-full bg-white rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
+                  >
+                    <div className="relative">
+                      {project.videoUrl ? (
+                        <div className="relative aspect-video group">
+                          <img
+                            src={`https://img.youtube.com/vi/${project.videoUrl}/maxresdefault.jpg`}
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = 
+                                `https://img.youtube.com/vi/${project.videoUrl}/mqdefault.jpg`;
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-black bg-opacity-20 group-hover:bg-opacity-30 transition-all duration-300">
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              <svg 
+                                className="w-16 h-16 text-white opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                              >
+                                <path d="M8 5v14l11-7z"/>
+                              </svg>
                             </div>
                           </div>
-                        </button>
-                      ))}
-                  </div>
-                </div>
-              </div>
+                        </div>
+                      ) : (
+                        <div className="aspect-video">
+                          <img
+                            src={project.cardImageUrl || project.imageUrl}
+                            alt={project.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                      <p className="text-gray-600 mb-4">{project.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag, tagIndex) => (
+                          <span 
+                            key={tagIndex}
+                            className="bg-gray-100 text-gray-800 text-sm px-3 py-1 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </button>
+                ))}
             </div>
           </div>
         </div>
