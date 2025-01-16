@@ -101,6 +101,16 @@ const Projects: React.FC = () => {
     },
     {
       id: 5,
+      title: "Red Rock Environment",
+      description: "Landscape design using Gaia 2.0, Unreal Enginer with assets spawned using PCG",
+      longDescription: "This project showcases the creation of a realistic environment in Unreal Engine 5.4. The landscape heightmap and masks were generated in Gaea 2.0, with Material Functions and Material Layers used to apply detailed textures. The Foliage System populated the ground, while PCG added trees and rocks for a natural touch. The scene is brought to life with carefully tuned HDR lighting, creating an immersive final result.",
+      category: "games",
+      tags: ["Unreal Engine", "PCG", "Gaia 2.0", "Material Functions"],
+      videoUrl: "_3eWXsy8m9w",
+      imageUrl: "/projects/game1.jpg"
+    },
+    {
+      id: 6,
       title: "Unreal Engine - GAS",
       description: "Generic implementation of the unreal engines Gamplay Ability System",
       longDescription: "This project showcases the implementation of Unreal Engine's Gameplay Ability System (GAS), setting up basic player attributes (Health, Mana) and using Gameplay Effects to apply various healing and damage effects, both instant and over-time sources. Finally, the changes are mapped to UI widgets showing the effect taking place.",
@@ -110,7 +120,7 @@ const Projects: React.FC = () => {
       imageUrl: "/projects/game1.jpg"
     },
     {
-      id: 6,
+      id: 7,
       title: "Ascii-Webcam",
       description: "Using openCV to convert a live stream from my webcam to ASCII in real-time. ",
       longDescription: "This coding project transforms a continuous webcam stream into ASCII characters. It is hard-coded for an HD camera, so it's **best viewed in full screen** to see the characters clearly. Currently working on adding a Sobel-filter to add more rigid lines with the _\\\\/| characters. ",
@@ -122,7 +132,7 @@ const Projects: React.FC = () => {
       githubUrl: "https://github.com/parvelmarv/ascii_webcamstream"
     },
     {
-      id: 7,
+      id: 8,
       title: "povelc.com",
       description: "My personal portfolio website built with Next.js, TypeScript, and Tailwind CSS.",
       longDescription: "A simple, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS, and deployed on Vercel. It has a clean design with basic animations and transitions. The site includes a straightforward gallery to display projects, with modals for more details. The focus was on keeping the code maintainable and ensuring good performance and accessibility.",
