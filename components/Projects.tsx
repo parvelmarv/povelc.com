@@ -107,7 +107,14 @@ const Projects: React.FC = () => {
       category: "games",
       tags: ["Unreal Engine", "PCG", "Gaia 2.0", "Material Functions"],
       videoUrl: "_3eWXsy8m9w",
-      imageUrl: "/projects/game1.jpg"
+      imageUrl: "/projects/RedRock/Landscape.png",
+      additionalScreenshots: [
+        "/projects/RedRock/Landscape.png",
+        "/projects/RedRock/Riverbed Mask_Out.png",
+        "/projects/RedRock/Snow Mask_Out.png",
+        "/projects/RedRock/Vegitation Mask_Out.png",
+        "/projects/RedRock/Slope_Out.png"
+      ]
     },
     {
       id: 6,
