@@ -116,6 +116,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (method === "POST") {
     console.log("Submitting score...");
+    console.log("Request body:", req.body);
+    console.log("Player name:", req.body.playerName);
+    console.log("Time:", req.body.time);
+    console.log("Time type:", typeof req.body.time);
     // API key validation
     const requestApiKey = req.headers['x-api-key'] as string;
     if (requestApiKey !== apiKey) {
