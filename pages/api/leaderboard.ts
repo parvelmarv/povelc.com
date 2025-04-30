@@ -116,20 +116,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (method === "POST") {
     console.log("Submitting score...");
+    console.log("Raw request body:", req.body);
+    console.log("Request headers:", req.headers);
     
-    // Parse the JSON body
     let body;
     try {
         body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
         console.log("Parsed body:", body);
+        console.log("Body type:", typeof body);
+        console.log("Body keys:", Object.keys(body));
     } catch (e) {
         console.error("Error parsing body:", e);
         return res.status(400).json({ error: "Invalid JSON" });
     }
 
     const { playerName, time } = body;
-    console.log("Player name:", playerName);
-    console.log("Time:", time);
+    console.log("Extracted playerName:", playerName);
+    console.log("Extracted time:", time);
     console.log("Time type:", typeof time);
     // API key validation
     const requestApiKey = req.headers['x-api-key'] as string;
