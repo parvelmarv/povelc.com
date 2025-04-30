@@ -66,7 +66,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin as string)) {
-    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Access-Control-Allow-Origin", origin as string);
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   }
@@ -111,7 +111,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const count = await collection.countDocuments();
       if (count >= maxScores) {
         // If we have more than maxScores, check if new score is better than the worst
-        const worstScore = await collection.findOne({}).sort({ time: -1 });
+        const worstScore = await collection.find({}).sort({ time: -1 }).limit(1).next();
         if (worstScore && worstScore.time <= time) {
           return res.status(200).json({ message: "Score not in top scores" });
         }
@@ -127,7 +127,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
       // If we have more than maxScores, remove the worst score
       if (count + 1 > maxScores) {
-        const worstScore = await collection.findOne({}).sort({ time: -1 });
+        const worstScore = await collection.find({}).sort({ time: -1 }).limit(1).next();
         if (worstScore) {
           await collection.deleteOne({ _id: worstScore._id });
         }
