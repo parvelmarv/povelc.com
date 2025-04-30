@@ -58,16 +58,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const allowedOrigins = [
     "http://localhost:3000",
     "http://localhost:5173",
-    "https://povelc.com",
+    "https://www.povelc.com",
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin as string)) {
     res.setHeader("Access-Control-Allow-Origin", origin as string);
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-api-key");
+    res.setHeader("Access-Control-Max-Age", "86400"); // 24 hours
   }
-
+  
   if (method === "OPTIONS") {
+    res.setHeader("Access-Control-Allow-Origin", origin as string);
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-api-key");
     return res.status(200).end();
   }
 
