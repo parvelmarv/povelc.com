@@ -63,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin as string)) {
     res.setHeader("Access-Control-Allow-Origin", origin as string);
-    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type, x-api-key");
   }
 
@@ -158,6 +158,25 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Server error" });
+    }
+  }
+
+  if (method === "DELETE") {
+    console.log("Clearing leaderboard...");
+    // API key validation
+    const requestApiKey = req.headers['x-api-key'] as string;
+    if (requestApiKey !== apiKey) {
+        console.log("Received API Key:", requestApiKey);
+        console.log("Expected API Key:", apiKey);
+        return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    try {
+        await collection.deleteMany({});
+        return res.status(200).json({ message: "Leaderboard cleared successfully" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Server error" });
     }
   }
 
