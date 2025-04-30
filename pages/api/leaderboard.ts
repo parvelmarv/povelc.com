@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { MongoClient } from 'mongodb';
+import clientPromise from '../../lib/mongodb';
+
 
 
 // Load MongoDB URI and API Key from environment variables
@@ -17,19 +18,8 @@ const rateLimitWindow = 60 * 1000; // 1 minute
 const maxScores = 20;
 const displayScores = 10;
 
-let client: MongoClient;
-
 // Rate limit tracking
 const rateLimit = new Map<string, number[]>();
-
-// Connect to MongoDB
-const connectToDatabase = async () => {
-  if (!client) {
-    client = new MongoClient(mongoURI);
-    await client.connect();
-  }
-  return client.db(dbName).collection(collectionName);
-};
 
 // Helper: Check if IP is within rate limit
 const checkRateLimit = (ip: string): boolean => {
@@ -80,7 +70,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(429).json({ error: "Too many requests" });
   }
 
-  const collection = await connectToDatabase();
+  const client = await clientPromise;
+  const db = client.db(dbName as string);
+  const collection = db.collection(collectionName as string);
 
   if (method === "GET") {
     // Fetch leaderboard
