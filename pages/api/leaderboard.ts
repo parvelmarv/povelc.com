@@ -136,6 +136,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const sanitizedTime = Number(time);
 
     if (!sanitizedPlayerName || isNaN(sanitizedTime) || !validateScore({ playerName: sanitizedPlayerName, time: sanitizedTime })) {
+      console.log("Validation failed:", {
+        hasPlayerName: !!sanitizedPlayerName,
+        isTimeValid: !isNaN(sanitizedTime),
+        timeValue: sanitizedTime,
+        validationResult: validateScore({ playerName: sanitizedPlayerName, time: sanitizedTime })
+      });
       return res.status(400).json({ error: "Invalid score data" });
     }
 
