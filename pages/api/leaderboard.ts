@@ -116,10 +116,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (method === "POST") {
     console.log("Submitting score...");
-    console.log("Request body:", req.body);
-    console.log("Player name:", req.body.playerName);
-    console.log("Time:", req.body.time);
-    console.log("Time type:", typeof req.body.time);
+    
+    // Parse the JSON body
+    let body;
+    try {
+        body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+        console.log("Parsed body:", body);
+    } catch (e) {
+        console.error("Error parsing body:", e);
+        return res.status(400).json({ error: "Invalid JSON" });
+    }
+
+    const { playerName, time } = body;
+    console.log("Player name:", playerName);
+    console.log("Time:", time);
+    console.log("Time type:", typeof time);
     // API key validation
     const requestApiKey = req.headers['x-api-key'] as string;
     if (requestApiKey !== apiKey) {
@@ -128,8 +139,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.log("Headers:", req.headers);
       return res.status(401).json({ error: "Unauthorized" });
     }
-
-    const { playerName, time } = req.body;
 
     // Input sanitization
     const sanitizedPlayerName = (playerName || '').toString().trim().slice(0, 50);
