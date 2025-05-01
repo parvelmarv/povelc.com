@@ -54,11 +54,12 @@ const validateScore = (score: { playerName: string; time: number }): boolean => 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
-  // CORS handling
   const allowedOrigins = [
     "http://localhost:3000",
     "http://localhost:5173",
     "https://www.povelc.com",
+    'https://parvelmarv.itch.io/',
+    'http://localhost:51972'
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin as string)) {
@@ -170,8 +171,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // API key validation
     const requestApiKey = req.headers['x-api-key'] as string;
     if (requestApiKey !== apiKey) {
-        console.log("Received API Key:", requestApiKey);
-        console.log("Expected API Key:", apiKey);
         return res.status(401).json({ error: "Unauthorized" });
     }
 
