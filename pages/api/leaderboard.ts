@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     "http://localhost:5173",
     "https://www.povelc.com",
     'https://parvelmarv.itch.io/',
-    'http://localhost:51972'
+    'http://localhost:53131'
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin as string)) {
@@ -106,8 +106,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (method === "POST") {
+    console.log("POST request received");
+    console.log("Headers:", req.headers);
+    console.log("Body:", req.body);
+    
     // API key validation
     const requestApiKey = req.headers['x-api-key'] as string;
+    console.log("API Key received:", requestApiKey ? "Present" : "Missing");
+
     if (requestApiKey !== apiKey) {
       return res.status(401).json({ error: "Unauthorized" });
     }
