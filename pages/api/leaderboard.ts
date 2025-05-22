@@ -59,7 +59,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     "http://localhost:5173",
     "https://www.povelc.com",
     'https://parvelmarv.itch.io/rollo-rocket',
-    'http://localhost:53131'
+    'https://html-classic.itch.zone',
+    'https://*.itch.zone',
+    'https://*.itch.io'
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin as string)) {
