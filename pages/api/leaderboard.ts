@@ -58,7 +58,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     "http://localhost:3000",
     "http://localhost:5173",
     "https://www.povelc.com",
-    'https://parvelmarv.itch.io/',
+    'https://parvelmarv.itch.io/rollo-rocket',
     'http://localhost:53131'
   ];
   const origin = req.headers.origin;
@@ -79,6 +79,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // Rate limit check
   if (!checkRateLimit(req.headers['x-forwarded-for'] as string || req.socket.remoteAddress || '')) {
     return res.status(429).json({ error: "Too many requests" });
+  }
+
+  // API key validation
+  const requestApiKey = req.headers['x-api-key'] as string;
+  if (requestApiKey !== apiKey) {
+    return res.status(401).json({ 
+      error: "Unauthorized",
+      message: "Invalid API key"
+    });
   }
 
   const client = await clientPromise;
@@ -106,13 +115,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (method === "POST") {
-    console.log("POST request received");
-    console.log("Headers:", req.headers);
-    console.log("Body:", req.body);
     
     // API key validation
     const requestApiKey = req.headers['x-api-key'] as string;
-    console.log("API Key received:", requestApiKey ? "Present" : "Missing");
+    //console.log("API Key received:", requestApiKey ? "Present" : "Missing");
 
     if (requestApiKey !== apiKey) {
       return res.status(401).json({ error: "Unauthorized" });
