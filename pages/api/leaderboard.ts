@@ -61,7 +61,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     'https://parvelmarv.itch.io/rollo-rocket',
     'https://html-classic.itch.zone',
     'https://*.itch.zone',
-    'https://*.itch.io'
+    'https://*.itch.io',
+    'https://www.gamingnovember.com',
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin as string)) {
