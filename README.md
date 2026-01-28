@@ -30,10 +30,4 @@ Create a `.env` file in the project root (this file is git-ignored) with at leas
 - `COLLECTION_NAME` – MongoDB collection name for leaderboard entries
 - `KEY_CREATION_DATE` – optional metadata used by the app
 
-On Vercel, set these in the project **Environment Variables** instead of committing them to Git.
-
-### Deployment
-
-This project is deployed using Vercel.  
-Pushing to the main branch triggers a **Production** deployment, and pushing to other branches creates **Preview** deployments that can be used to test changes before merging.
 
