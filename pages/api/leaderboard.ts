@@ -7,6 +7,7 @@ interface LeaderboardEntry {
   _id?: ObjectId;
   playerName: string;
   time: number;
+  level?: number;
   createdAt: Date;
 }
 
@@ -99,7 +100,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (method === "GET") {
     try {
-      const scores = await collection.find<LeaderboardEntry>({})
+      // Get level from URL parameters
+      // Defaults to 2 if no level is provided
+      const levelParam = req.query.level;
+      const level = levelParam ? parseInt(levelParam as string, 10) : 2;
+      
+      // Only find entries that match the specific level
+      const scores = await collection.find<LeaderboardEntry>({ level })
         .sort({ time: 1 })
         .limit(displayScores)
         .toArray();
@@ -107,6 +114,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const formattedScores = scores.map(score => ({
         playerName: score.playerName,
         time: score.time,
+        level: score.level,
         createdAt: score.createdAt.toISOString()
       }));
       
@@ -127,7 +135,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ error: "Unauthorized" });
     }
 
-    const { playerName, time } = req.body;
+    const { playerName, time, level } = req.body;
+
+    // Default level to 2 if not provided
+    const scoreLevel = level !== undefined ? parseInt(level as string, 10) : 2;
 
     // Input validation
     if (!playerName || typeof time !== 'number' || !validateScore({ playerName, time })) {
@@ -138,9 +149,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-      const count = await collection.countDocuments();
+      // Filter by level for count and worst score checks
+      const levelQuery = { level: scoreLevel };
+      const count = await collection.countDocuments(levelQuery);
       if (count >= maxScores) {
-        const worstScore = await collection.find<LeaderboardEntry>({})
+        const worstScore = await collection.find<LeaderboardEntry>(levelQuery)
           .sort({ time: -1 })
           .limit(1)
           .next();
@@ -152,13 +165,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const newScore: LeaderboardEntry = {
         playerName,
         time,
+        level: scoreLevel,
         createdAt: new Date(),
       };
 
       await collection.insertOne(newScore);
 
       if (count + 1 > maxScores) {
-        const worstScore = await collection.find<LeaderboardEntry>({})
+        const worstScore = await collection.find<LeaderboardEntry>(levelQuery)
           .sort({ time: -1 })
           .limit(1)
           .next();
@@ -172,6 +186,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         score: {
           playerName,
           time,
+          level: scoreLevel,
           createdAt: newScore.createdAt.toISOString()
         }
       });
