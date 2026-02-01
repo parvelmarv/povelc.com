@@ -30,6 +30,12 @@ Create a `.env` file in the project root (this file is git-ignored) with at leas
 - `COLLECTION_NAME` – MongoDB collection name for leaderboard entries
 - `KEY_CREATION_DATE` – optional metadata used by the app
 
+**For Unity game integration (Cloudflare R2):**
+- `CLOUDFLARE_ACCOUNT_ID` – Your Cloudflare account ID
+- `R2_ACCESS_KEY_ID` – R2 access key ID
+- `R2_SECRET_ACCESS_KEY` – R2 secret access key
+- `R2_BUCKET_NAME` – Name of your R2 bucket
+
 On Vercel, set these in the project **Environment Variables** instead of committing them to Git.
 
 ### Deployment

@@ -68,6 +68,7 @@ const Hero: React.FC = () => {
                   width={288}
                   height={288}
                   className="object-cover scale-75 -translate-y-10 grayscale"
+                  style={{ width: 'auto', height: 'auto' }}
                   priority
                 />
               </div>

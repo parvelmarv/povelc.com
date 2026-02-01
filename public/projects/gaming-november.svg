@@ -1,0 +1,7 @@
+<svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black background -->
+  <rect width="400" height="300" fill="#000000"/>
+  
+  <!-- GN text in white -->
+  <text x="200" y="175" font-family="Arial, sans-serif" font-size="96" font-weight="bold" text-anchor="middle" fill="#FFFFFF">GN</text>
+</svg>
