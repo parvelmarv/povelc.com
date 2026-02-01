@@ -90,25 +90,17 @@ export default async function handler(
       res.setHeader('Content-Length', response.ContentLength.toString());
     }
     
-    // Stream chunks directly to the response
-    const chunks: Uint8Array[] = [];
+    // Stream chunks directly to the response as they arrive
+    // This prevents loading the entire file into memory at once
+    let totalLength = 0;
     for await (const chunk of response.Body as any) {
-      chunks.push(chunk);
-      // Send chunks as they arrive to reduce memory usage
-      // Note: We still collect chunks because Next.js response doesn't support streaming directly
+      const buffer = Buffer.from(chunk);
+      totalLength += buffer.length;
+      res.write(buffer);
     }
     
-    // Combine chunks and send
-    const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
-    const result = new Uint8Array(totalLength);
-    let offset = 0;
-    for (const chunk of chunks) {
-      result.set(chunk, offset);
-      offset += chunk.length;
-    }
-    
-    console.log(`[API] Successfully fetched ${filename}, size: ${totalLength} bytes`);
-    return res.send(Buffer.from(result));
+    console.log(`[API] Successfully streamed ${filename}, size: ${totalLength} bytes`);
+    res.end();
     
   } catch (error: any) {
     console.error('[API] Error serving game file:', error);
@@ -119,9 +111,11 @@ export default async function handler(
     let statusCode = 500;
     let userMessage = 'Failed to load game file';
     
-    if (errorName === 'NoSuchKey' || errorMessage.includes('does not exist')) {
+    const requestedFilename = typeof req.query.filename === 'string' ? req.query.filename : 'unknown';
+    
+    if (errorName === 'NoSuchKey' || errorMessage.includes('does not exist') || errorMessage.includes('NoSuchKey')) {
       statusCode = 404;
-      userMessage = 'Game file not found';
+      userMessage = `Game file not found: ${requestedFilename}`;
     } else if (errorMessage.includes('timeout') || errorMessage.includes('Timeout')) {
       statusCode = 504;
       userMessage = 'Request timeout - file may be too large';
@@ -130,17 +124,25 @@ export default async function handler(
       userMessage = 'Server configuration error';
     }
     
+    // Log full error details for debugging
     console.error('[API] Error details:', {
       filename: req.query.filename,
       gameName: req.query.gameName,
       error: errorMessage,
       errorName,
-      stack: error?.stack
+      code: error?.code,
+      requestId: error?.$metadata?.requestId,
+      stack: error?.stack?.substring(0, 500) // Limit stack trace length
     });
     
+    // For production, include error details in response to help debug
+    // This is safe since it's just error messages, not sensitive data
     return res.status(statusCode).json({ 
       error: userMessage,
-      details: process.env.NODE_ENV === 'development' ? errorMessage : undefined
+      filename: requestedFilename,
+      details: errorMessage,
+      errorName: errorName,
+      code: error?.code
     });
   }
 }
