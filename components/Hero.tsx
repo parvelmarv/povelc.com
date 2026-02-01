@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
               Hello!
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            I’m Povel, a program and project manager by trade, with experience leading initiatives at companies like Spotify. While I’ve always had a passion for programming and hands-on projects, over the past year, I’ve been dedicating even more time to exploring my creative side—diving deeper into composing, game development, and various side projects. Below, you can find a few of the things I’ve been working on lately.
+            I'm Povel, a software developer with experience in programming and project management at companies like Spotify. While I've always had a passion for programming and hands-on projects, over the past year, I've been dedicating even more time to exploring my creative side—diving deeper into composing, game development, and various side projects. Below, you can find a few of the things I've been working on lately.
             </p>
             <div className="flex gap-4">
               <a 
