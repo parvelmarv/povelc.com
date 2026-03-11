@@ -118,7 +118,7 @@ const Projects: React.FC = () => {
         "/projects/RedRock/Slope_Out.png"
       ]
     },
-    {
+    /*{
       id: 6,
       title: "Unreal Engine - GAS",
       description: "Generic implementation of the unreal engines Gamplay Ability System",
@@ -127,7 +127,7 @@ const Projects: React.FC = () => {
       tags: ["Unreal Engine 5", "C++", "GAS", "Blueprints"],
       videoUrl: "GLvuUBskYTo",
       imageUrl: "/projects/game1.jpg"
-    },
+    },*/
     {
       id: 7,
       title: "Ascii-Webcam",
